@@ -10,11 +10,39 @@ app.use(express.static('server/public'));
 let calculations = []
 
 
+function addition(num1, num2) { 
+  return(num1 + num2)
+}
+
+function subtraction(num1, num2) {
+  return(num1 - num2)
+}
+
+function multiplication(num1, num2) {
+  return(num1 * num2)
+}
+
+function division(num1, num2) {
+  return(num1 / num2)
+}
+
 // Here's a wonderful place to make some routes:
 
-// GET /calculations
+app.get('/calculations', (req, res) => {
+  res.send(calculations);
+});
 
-// POST /calculations
+// end GET /calculations
+
+app.post("/calculations", (req, res) => {
+  const newItem = req.body; // makes body be parsed with json
+
+  calculations.push(newItem);
+  res.status(201).json(newItem);
+});
+
+
+// end POST /calculations
 
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:

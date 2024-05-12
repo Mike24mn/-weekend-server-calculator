@@ -8,20 +8,23 @@
   </head>
   <body>
     <h1>Server-Side Calculator</h1>
+    <div id="messages">
 
+    </div>
     <form data-testid="calculator">
-      <input data-testid="numOne" placeholder="First Number">
-      <button>+</button>
-      <button>-</button>
-      <button>*</button>
-      <button>/</button>
-      <input data-testid="numTwo" placeholder="Second Number">
-      <button>=</button>
-      <button>C</button>
+      <input id="numOne" data-testid="numOne" placeholder="First Number">
+      <button id="add" onClick="handleSubmit(event)">+</button>
+      <button id="subtract" onClick="handleSubmit(event)">-</button>
+      <button id="multiply" onClick="handleSubmit(event)">*</button>
+      <button id="divide" onClick="handleSubmit(event)">/</button>
+      <input id="numTwo" data-testid="numTwo" placeholder="Second Number">
+      <button id="equals" onClick="handleSubmit(event)">=</button>
+      <button id="clear"onClick="handleSubmit(event)">C</button>
     </form>
 
     <section data-testid="recentResult">
       <!-- The most recent calculation result goes here. -->
+      <h2 id="recentResult"></h2>
     </section>
 
     <section data-testid="resultHistory">
