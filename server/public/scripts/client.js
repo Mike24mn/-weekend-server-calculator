@@ -70,10 +70,10 @@ function onReady() {
         },
       })
         .then(function (response) {
-          console.log("calculations added:", response);
-          document.getElementById("recentResult").innerHTML += `<tr>
-          <td>Player One's Guess Is: ${numOneInput} Player Two's Guess Is:${numTwoInput}
-          </td></tr>`;
+          console.log("calculations:", response);
+          document.getElementById("recentResult").innerHTML += `<li>
+          ${numOneInput} ${numTwoInput}
+          </li>`;
           document.getElementById("numOne").value = "";
           document.getElementById("numTwo").value = "";
         })
