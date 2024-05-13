@@ -55,19 +55,19 @@ app.post("/calculations", (req, res) => {
     default: return res.status(400).send("bad operator")
 
     case "+":
-      result = addition(numOne, numTwo)
+      result = addition(parseFloat(numOne), parseFloat(numTwo))
       break;
 
     case "-":
-      result = subtraction(numOne, numTwo)
+      result = subtraction(parseFloat(numOne), parseFloat(numTwo));
       break
 
     case "*":
-      result = multiplication(numOne, numTwo)
+      result = multiplication(parseFloat(numOne), parseFloat(numTwo));
       break
 
     case "/":
-      result = division(numOne, numTwo)
+      result = division(parseFloat(numOne), parseFloat(numTwo));
       break
   }
 

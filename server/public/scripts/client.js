@@ -74,8 +74,10 @@ function onReady() {
       })
         .then(function (response) {
           console.log("calculations:", response);
+          const data = response.data
+          const resultInString = `${data.numOne} ${data.operator} ${data.numTwo}`
           document.getElementById("recentResult").innerHTML += `<li>
-          ${response.data.expression} = ${response.data.result}
+          ${resultInString} = ${response.data.result}
           </li>`;
           // could also call clear inputs here instead of the code below
           document.getElementById("numOne").value = "";
