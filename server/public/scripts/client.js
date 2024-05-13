@@ -97,10 +97,10 @@ function onReady() {
       .then(function (response) {
         console.log("calculations:", response);
 
-        return axios.get("/calculations"); //
+        return axios.get("/calculations"); // get request after successful post
 
         const data = response.data;
-        const resultInString = `${data.numOne} ${data.operator} ${data.numTwo}`
+        const resultInString = `${data.numOne} ${data.operator} ${data.numTwo}`;
         document.getElementById("recentResult").innerHTML += `<li>
           ${resultInString} = ${response.data.result}
           </li>`;
@@ -112,7 +112,7 @@ function onReady() {
 
       .catch(function (error) {
         console.log(error);
-        messageOutput.innerHTML = "Error, failed to process any calculations!"
+        messageOutput.innerHTML = "Error, failed to process any calculations!";
       });
   }
 
