@@ -38,42 +38,46 @@ function onReady() {
 
     console.log("handle submit works...");
 
-    const recentResult = document.getElementById("recentResult");
+    const operation = event.target.textContent // gets button text
   
-    const numOneInput = document.getElementById("numOne").value;
+    const numOneInput = document.getElementById("numOne").value; // gets input value
   
-    const numTwoInput= document.getElementById("numTwo").value;
+    const numTwoInput= document.getElementById("numTwo").value; // gets input value
 
-    const messageOutput = document.getElementById("messages")
+    const messageOutput = document.getElementById("messages") // variable to send to id=messages in html
 
-    const addBtn = document.getElementById('add')
+    if (operation === "C") {
+        clearInputs()
+        return;
+    }
+    // if operation is C, call clearInputs() function
+    
+    // the below if statement checks if num one or num two has an input, and if the inputs are not numbers
 
-    const subtractBtn = document.getElementById('subtract')
+    if (!numOneInput || !numTwoInput || isNaN(numOneInput) || isNaN(numTwoInput)) {
+        messageOutput.textContent = "Enter some valid numbers yo"
+        return;
+    }
 
-    const multiplyBtn = document.getElementById('multiply')
-
-    const divideBtn = document.getElementById('divide') 
-
-    const equalsBtn = document.getElementById('equals')
-
-    const clearBtn = document.getElementById('clear')
-
-    console.log(`incoming information: ${numOneInput} ${numTwoInput}`);
+    console.log(`incoming information: ${numOneInput} ${numTwoInput}, operation: ${operation}`);
   
-    if (numOneInput && numTwoInput) {
-      axios({
+   
+    axios({
         method: "POST",
         url: "/calculations",
         data: {
           numOne: numOneInput,
           numTwo: numTwoInput,
+          operator: operation,
+          result: "" // may cause issues due to string type, remember this LINE!!! 72!!!
         },
       })
         .then(function (response) {
           console.log("calculations:", response);
           document.getElementById("recentResult").innerHTML += `<li>
-          ${numOneInput} ${numTwoInput}
+          ${response.data.expression} = ${response.data.result}
           </li>`;
+          // could also call clear inputs here instead of the code below
           document.getElementById("numOne").value = "";
           document.getElementById("numTwo").value = "";
         })
@@ -83,11 +87,16 @@ function onReady() {
           messageOutput.innerHTML = "Error, failed to process any calculations!";
         });
     } 
-    else {
-      messageOutput.innerHTML = "* Missing information, please ensure fields one and two are filled out prior to submission!";
+
+    function clearInputs() {
+        document.getElementById("numOne").value = ""
+        document.getElementById('numTwo').value = ""
+        document.getElementById('recentResult').innerHTML = ""
+        document.getElementById('messages').textContent = "Stuff Cleared"
     }
+
   }
-}
+
 
 onReady();
   

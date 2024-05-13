@@ -23,6 +23,9 @@ function multiplication(num1, num2) {
 }
 
 function division(num1, num2) {
+  if (num2 ==0) {
+    console.error("Cannot divide by zero");
+  }
   return(num1 / num2)
 }
 
@@ -35,10 +38,49 @@ app.get('/calculations', (req, res) => {
 // end GET /calculations
 
 app.post("/calculations", (req, res) => {
-  const newItem = req.body; // makes body be parsed with json
+
+  const {numOne, numTwo, operator} = req.body; // makes body be parsed with json and picks apart numOne, numTwo, and operator AKA destructures array values
+
+  // if statement below checks for a lack of values and returns error if that is the case
+  if (numOne == null || numTwo == null || operator == null) {
+    return res.status(400).json({error: "missing data for calc"})
+  }
+
+  //function below is structured this way to allow for eventual assignment of 'result' values!!! KEEP THIS IN YOUR FUTURE TOOLBOX and remember you can do this in javascript. Assignment is determined after analysis and running of the coming blocks
+
+  let result;
+  try {
+  switch(operator) {
+
+    default: return res.status(400).send("bad operator")
+
+    case "+":
+      result = addition(numOne, numTwo)
+      break;
+
+    case "-":
+      result = subtraction(numOne, numTwo)
+      break
+
+    case "*":
+      result = multiplication(numOne, numTwo)
+      break
+
+    case "/":
+      result = division(numOne, numTwo)
+      break
+  }
+
+  const newItem = { numOne, numTwo, operator, result}
 
   calculations.push(newItem);
+
   res.status(201).json(newItem);
+}
+
+catch (error) {
+  res.status(500).json({error: error.message})
+  }
 });
 
 
