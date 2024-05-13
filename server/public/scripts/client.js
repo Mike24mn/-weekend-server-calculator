@@ -32,7 +32,6 @@ function onReady() {
             const lastResultString = `${lastResult.numOne} ${lastResult.operator} ${lastResult.numTwo} = ${lastResult.result}`
             document.getElementById('recentResult').innerHTML = `<li>${lastResultString}</li>`
           }
-    
 
         })
         .catch(function (error) {
