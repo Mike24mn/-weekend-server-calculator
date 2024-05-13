@@ -16,11 +16,22 @@ function onReady() {
     
           console.log("Stuff we fetchin'", response.data); // return data we fetchin' from the server in response to request
     
-          const numFromServer = response.data; // set variable equal to what we fetchin'
+          const recentResult = response.data; // set variable equal to what we fetchin'
     
-          console.log("Full item data:", numFromServer);
+          console.log("Full item data:", recentResult);
     
-          const recentResult = document.querySelector("#recentResult");
+        // logic in if statement below for get request of most recent result rendering 
+        // set recentResult (variable above) to response data fetched from the server
+        // then if the length is greater than 0, meaning something is present there, 
+        // creates a new variable lastResult that is equal to the most recent index value
+        // of recentResult, hence the .length -1 logic, we then turn it into a string
+        // and slap it into the 'recentResult' location of our HTML, Bazinga!
+
+          if (recentResult.length > 0) {
+            const lastResult = recentResult[recentResult.length -1]
+            const lastResultString = `${lastResult.numOne} ${lastResult.operator} ${lastResult.numTwo} = ${lastResult.result}`
+            document.getElementById('recentResult').innerHTML = `<li>${lastResultString}</li>`
+          }
     
 
         })
