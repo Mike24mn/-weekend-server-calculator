@@ -13,13 +13,13 @@
     </div>
     <form data-testid="calculator">
       <input id="numOne" data-testid="numOne" placeholder="First Number">
-      <button id="add" onClick="handleSubmit(event)">+</button>
-      <button id="subtract" onClick="handleSubmit(event)">-</button>
-      <button id="multiply" onClick="handleSubmit(event)">*</button>
-      <button id="divide" onClick="handleSubmit(event)">/</button>
+      <button type="button" id="add" onClick="setOperator('+')">+</button>
+      <button type="button" id="subtract" onClick="setOperator('-')">-</button>
+      <button type="button" id="multiply" onClick="setOperator('*')">*</button>
+      <button type="button" id="divide" onClick="setOperator('/')">/</button>
       <input id="numTwo" data-testid="numTwo" placeholder="Second Number">
-      <button id="equals" onClick="handleSubmit(event)">=</button>
-      <button id="clear" onClick="handleSubmit(event)">C</button>
+      <button type="submit" id="equals" onClick="handleSubmit(event)" data-testid="submitButton">=</button>
+      <button type="button" id="clear" onClick="clearInputs()">C</button>
     </form>
 
     <section data-testid="recentResult">
